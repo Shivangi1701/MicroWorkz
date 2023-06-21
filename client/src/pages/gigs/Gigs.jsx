@@ -13,9 +13,9 @@ const Gigs = () => {
 
   const {search} = useLocation();
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["repoData"],
-    queryFn: () => newRequest.get(`/gigs${search}`).then((res) => {
+    queryFn: () => newRequest.get(`/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`).then((res) => {
       return res.data;
     }),
   })
@@ -24,6 +24,14 @@ const Gigs = () => {
     setSort(type)
     setOpen(false);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [sort]);
+
+  const apply = () => {
+    refetch();
+  }
 
   return (
     <div className="gigs">
@@ -36,7 +44,7 @@ const Gigs = () => {
             <span>Budget</span>
             <input ref={minRef} type="text" placeholder='min'/>
             <input ref={maxRef} type="text" placeholder='max'/>
-            <button>Apply</button>
+            <button onClick={apply}>Apply</button>
           </div>
           <div className="right">
             <span className='sortBy'>SortBy</span>
