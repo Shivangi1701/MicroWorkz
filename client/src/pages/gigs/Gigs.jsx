@@ -15,7 +15,7 @@ const Gigs = () => {
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["repoData"],
-    queryFn: () => newRequest.get(`/gigs`).then((res) => {
+    queryFn: () => newRequest.get(`/gigs${search}`).then((res) => {
       return res.data;
     }),
   })
