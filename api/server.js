@@ -26,7 +26,7 @@ app.use(express.json()); // middleware: to get json body of client request
 app.use(cookieParser()); // for jwt
 app.use(cors({ origin: "http://localhost:5173", credentials: true })); // for cors library
 
-app.use("/api/gig", gigRoute);
+app.use("/api/gigs", gigRoute);
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/order", orderRoute);
