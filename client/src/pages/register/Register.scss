@@ -1,0 +1,77 @@
+.register {
+  display: flex;
+  justify-content: center;
+
+  form {
+    width: 950px;
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+    padding: 22px 100px;
+
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      h1 {
+        color: gray;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+
+      label {
+        color: gray;
+        font-size: 18px;
+      }
+
+      input,
+      textarea {
+        padding: 15px;
+      }
+
+      button {
+        margin-top: 10px;
+        border: none;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: royalblue;
+        color: white;
+        font-weight: 500;
+        font-size: 18px;
+        cursor: pointer;
+      }
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      h1 {
+        color: gray;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+
+      label {
+        color: gray;
+        font-size: 18px;
+      }
+
+      input,
+      textarea {
+        padding: 20px;
+        margin: 35px 0px;
+      }
+
+      .toggle {
+        input {
+          margin: 32px 15px;
+        }
+      }
+    }
+  }
+}
