@@ -17,6 +17,7 @@ export const createGig = async (req, res, next) => {
     next(err);
   }
 };
+
 export const deleteGig = async (req, res, next) => {
   // this will come from verifyToken and req.id is updated to payload.id
   try {
@@ -31,14 +32,24 @@ export const deleteGig = async (req, res, next) => {
     next(err);
   }
 };
+
 export const getGig = async (req, res, next) => {
   try {
+    const gig = await Gig.findById(req.params.id);
+    if (!gig) next(createError(404, "Gig not found!"));
+    res.status(200).send(gig);
   } catch (err) {
     next(err);
   }
 };
+
 export const getGigs = async (req, res, next) => {
+  const filters = {
+    cat: "design",
+  };
   try {
+    const gigs = await Gig.find(filters);
+    res.status(200).send(gigs);
   } catch (err) {
     next(err);
   }
