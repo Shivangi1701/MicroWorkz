@@ -54,7 +54,7 @@ export const getGigs = async (req, res, next) => {
     ...(q.search && { title: { $regex: q.search, $options: "i" } }), // not sensitive for lower & uppercase
   };
   try {
-    const gigs = await Gig.find(filters);
+    const gigs = await Gig.find(filters).sort({ [q.sort]: -1 }); // also sort on basis of price etc.
     res.status(200).send(gigs);
   } catch (err) {
     next(err);

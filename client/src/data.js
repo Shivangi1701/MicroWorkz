@@ -153,15 +153,6 @@ export const gigs = [
   },
   {
     id: 2,
-    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs3/297030921/original/1dd7e075706a1379edbe27906eeb46a88a6fdf19.png",
-    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/profile/photos/22711136/original/fiverr_profile.jpg",
-    desc: "Gig2 desc",
-    price: 112,
-    star: 5,
-    username: "spickex",
-  },
-  {
-    id: 3,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/7de838ed72ac893a7c9166d5289ec560-1683168487/Finished.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/27bdb82e27e444fe2b27aa7b3083cee8-1591694084918/f79ede47-da5f-440a-bf23-57ed9ef7d363.png",
     desc: "Gig3 desc",
@@ -170,7 +161,7 @@ export const gigs = [
     username: "eveeelin",
   },
   {
-    id: 4,
+    id: 3,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/296272891/original/cdcef8a97d7dd47415447d0f9bb01218a79b7038.jpg",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/b615b780b5c813d932953d05ec10f811-1596879215580/6b4a9867-ad06-415f-b307-11177ae30fdd.jpeg",
     desc: "Gig4 desc",
@@ -179,7 +170,7 @@ export const gigs = [
     username: "christophbrandl",
   },
   {
-    id: 5,
+    id: 4,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/299303050/original/00ed10f685f8c011ba2f2209e717ebd099541647.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
     desc: "Gig5 desc",
@@ -188,7 +179,7 @@ export const gigs = [
     username: "noneyn",
   },
   {
-    id: 6,
+    id: 5,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/298455330/original/71894dfd3e509a10b445aeca0b3db60d38f2e7e6.jpg",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/58960b09956dc710d2d5a33573261936-1554984111113/750ccab0-8a64-4c91-b9a4-d10039dbf79c.jpg",
     desc: "Gig6 desc",
@@ -197,7 +188,7 @@ export const gigs = [
     username: "mijalzagier",
   },
   {
-    id: 7,
+    id: 6,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/301090797/original/7f03f6453bcaa2c0a5416afc2a7eaf119af7d0e4.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/79cf5c7a560e6668555338b2831480e1-1539770224917/2bb8af3c-4cce-42a8-a699-f11177524084.png",
     desc: "Gig7 desc",
@@ -206,16 +197,7 @@ export const gigs = [
     username: "skydesigner",
   },
   {
-    id: 8,
-    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs2/297030921/original/15482f4dc96ae2ef5b2c7a79551fd4600e2dd592.png",
-    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/ad68f554913d9d326d611e604ef79b0b-1608722734146/74e5ab33-a5fc-40ae-9cee-a91b23e80237.jpg",
-    desc: "Gig8 desc",
-    price: 112,
-    star: 5,
-    username: "passionshake",
-  },
-  {
-    id: 9,
+    id: 7,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/288408744/original/61b4ea49c92dde56a8d9113bf82bf82ded867c0b.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/0738007a913d22569fe2b049f9259526-1589210299120/db111eb4-c119-42b4-9a1d-9116601f3d22.png",
     desc: "Gig9 desc",
@@ -224,16 +206,7 @@ export const gigs = [
     username: "fernadobengua",
   },
   {
-    id: 10,
-    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/297030921/original/c49eeb63acdac26350de8b96276618dcbfce8c72.png",
-    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/706891a4cc08826adca2819e14129aaf-1583755607494/5a706f4e-9f73-4ebc-97ff-9d2ef16bf28c.jpg",
-    desc: "Gig10 desc",
-    price: 112,
-    star: 5,
-    username: "lamonastudio",
-  },
-  {
-    id: 11,
+    id: 8,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/88c6d5e929ee4f5a66afd71f60269b17-1683579858/Tree%20(10).png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig11 desc",
@@ -242,7 +215,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 12,
+    id: 9,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs3/298676084/original/c73f161ce591d08b618bef938b960757a92ff006.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig12 desc",
@@ -251,7 +224,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 13,
+    id: 10,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/198975847/original/5af0c91ae1a8df6caafb05ece1244108ddf8b9b6.jpg",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig13 desc",
@@ -260,7 +233,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 14,
+    id: 11,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs3/198975847/original/38e8190d7daa830a68ef6b355ad46f4b2ff33e52.jpg",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig14 desc",
@@ -269,7 +242,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 15,
+    id: 12,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/0d6c59d39b367c5aa3e8732becb2d56f-1683399439/6.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig15 desc",
@@ -278,7 +251,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 16,
+    id: 13,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs3/300950700/original/40ef17230e6912bae9c198375d1e367519ab0272.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig16 desc",
@@ -287,7 +260,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 17,
+    id: 14,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs2/290220082/original/c2906fe856142651c886c5e3b9024006037313cf.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig17 desc",
@@ -296,7 +269,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 18,
+    id: 15,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs3/299303050/original/4f23add854c310d98cbdbf7dbfe2dbc2e4789dd7.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig18 desc",
@@ -305,7 +278,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 19,
+    id: 16,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/84934cbb1ba765a4a516d5c6e222c433-1683401445/Mishku_person_meditating_yoga_chakras_flowing_around_106366dd-b2a9-4efd-9d68-070153b88332.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig19 desc",
@@ -314,7 +287,7 @@ export const gigs = [
     username: "annapietrangeli",
   },
   {
-    id: 20,
+    id: 17,
     img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs3/289758028/original/617456a368439ed7fc730c2c41c702dc2f36adcc.png",
     pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg",
     desc: "Gig20 desc",

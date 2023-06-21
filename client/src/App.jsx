@@ -11,20 +11,21 @@ import MyGigs from "./pages/myGigs/MyGigs";
 import Add from "./pages/add/Add";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
-/*
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
-*/
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import "./App.scss";
+
 function App() {
   const Layout = () => {
+    const queryClient = new QueryClient(); // to cache our fetch data
     return (
       // outlet renders the child route's element
       <div className="app">
-        <Navbar/>
-        <Outlet/> 
-        <Footer/>
+        <QueryClientProvider client={queryClient}>
+          <Navbar/>
+          <Outlet/> 
+          <Footer/>
+        </QueryClientProvider>
       </div>
     )
   }
