@@ -44,8 +44,14 @@ export const getGig = async (req, res, next) => {
 };
 
 export const getGigs = async (req, res, next) => {
+  const q = req.query;
   const filters = {
-    cat: "design",
+    ...(q.userId && { userId: q.userId }),
+    ...(q.cat && { cat: q.cat }), // if this category exist then spread it & create object
+    ...((q.min || q.max) && {
+      price: { ...(q.min && { $gt: q.min }), ...(q.max && { $lt: q.max }) },
+    }),
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }), // not sensitive for lower & uppercase
   };
   try {
     const gigs = await Gig.find(filters);
