@@ -1,48 +1,60 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Gig.scss"
 import { Slider } from 'infinite-react-carousel/lib'
+import { useQuery } from "@tanstack/react-query";
+import newRequest from '../../utils/newRequest';
+import { useParams } from 'react-router-dom';
+
 const Gig = () => {
+
+  const {id} = useParams(); // gig id from query params
+
+  const { isLoading, error, data } = useQuery({ // fetching gig data through it's id in query parameter
+    queryKey: ["gig"],
+    queryFn: () => newRequest.get(`/gigs/single/${id}`).then((res) => {
+      return res.data;
+    }),
+  })
+
   return (
     <div className='gig'>
-      <div className="container">
+      {isLoading ? "loading" : error ? "Something went wrong!" : <div className="container">
         <div className="left">
-          <span className='pathname'>FIVERR{" > "}GRAPHICS & DESIGN{" > "}</span>
-          <h1>I will create AI generated art for you</h1>
+          <span className='pathname'>MICROWORKZ{" > "}{data.cat}{" > "}</span>
+          <h1>{data.title}</h1>
           <div className="user">
             <img className='pp' src="https://fiverr-res.cloudinary.com/t_profile_original,q_auto,f_auto/attachments/profile/photo/c5323d1e3c30bbac2c31a905b5bd8cb2-1675191168940/22bca898-8c41-4832-be06-ac78f7d044a4.PNG" alt="" />
             <span>Navya Mehta</span>
-            <div className="stars">
-              <img src="/img/star.png" alt="" />
-              <img src="/img/star.png" alt="" />
-              <img src="/img/star.png" alt="" />
-              <img src="/img/star.png" alt="" />
-              <img src="/img/star.png" alt="" />
-              <span>5</span>
-            </div>
+            {!isNaN(data.totalStars / data.starNumber) && (
+              <div className="stars">
+                {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i)=>(
+                  <img src="/img/star.png" alt="" key={i} />
+                ))}
+                <span>{Math.round(data.totalStars / data.starNumber)}</span>
+              </div>
+            )}
           </div>
           <Slider slidesToShow={1} arrowsScroll={1} className="slider" >
-            <img src="https://images.nightcafe.studio/jobs/E1YohcfqSHe4qjQXshvs/8hIe7fiqz40OC03kBZGk--1--p1px7_6x.jpg?tr=w-1600,c-at_max" alt="" />
-            <img src="https://cdn.pixabay.com/photo/2023/03/27/01/20/ai-generated-7879479_960_720.jpg" alt="" />
-            <img src="https://venturebeat.com/wp-content/uploads/2023/04/annevb_artificial_intelligence_creating_art_-_artistic_flowing__626e5b84-c444-4697-9565-75fd3ffbfb78.png?fit=1728%2C864&strip=all" alt="" />
+            {data.images.map(img=>(
+              <img key={img} src={img} alt="" />
+            ))}
           </Slider>
           <h2>About this gig</h2>
-          <p>
-            I will create 1, 3, or 7 fully customized images (based on your descriptions) using a powerful AI tool called Midjourney. You can send me a photo, a detailed description, or simply just send me a message and we can discuss your idea. It is all up to your imagination + my skills and with that - the possibilities are endless. I am flexible and committed to creating an optimal result for your project
-          </p>
+          <p>{data.desc}</p>
           <div className="seller">
             <h2>About the seller</h2>
             <div className="user">
               <img className='pp' src="https://fiverr-res.cloudinary.com/t_profile_original,q_auto,f_auto/attachments/profile/photo/c5323d1e3c30bbac2c31a905b5bd8cb2-1675191168940/22bca898-8c41-4832-be06-ac78f7d044a4.PNG" alt="" />
               <div className="info">
                 <span>Navya Mehta</span>
-                <div className="stars">
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <img src="/img/star.png" alt="" />
-                  <span>5</span>
-                </div>
+                {!isNaN(data.totalStars / data.starNumber) && (
+                  <div className="stars">
+                    {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i)=>(
+                      <img src="/img/star.png" alt="" key={i} />
+                    ))}
+                    <span>{Math.round(data.totalStars / data.starNumber)}</span>
+                  </div>
+                )}
                 <button>Contact Me</button>
               </div>
             </div>
@@ -165,41 +177,31 @@ const Gig = () => {
         </div>
         <div className="right">
           <div className="price">
-            <h3>1 AI generated image</h3>
-            <h2>$ 59.99</h2>
+            <h3>{data.shortTitle}</h3>
+            <h2>$ {data.price}</h2>
           </div>
-          <p>One custom digital design **Please CONTACT ME BEFORE placing an order :)**</p>
+          <p>{data.shortDesc}</p>
           <div className="details">
             <div className="item">
               <img src="/img/clock.png" alt="" />
-              <span>2 days delivery</span>
+              <span>{data.deliveryTime} Days</span>
             </div>
             <div className="item">
               <img src="/img/recycle.png" alt="" />
-              <span>3 Revisions</span>
+              <span>{data.revisionNumber} Revisions</span>
             </div>
           </div>
           <div className="features">
-            <div className="item">
-              <img src="/img/greencheck.png" alt="" />
-              <span>Prompt writing</span>
-            </div>
-            <div className="item">
-              <img src="/img/greencheck.png" alt="" />
-              <span>Artwork delivery</span>
-            </div>
-            <div className="item">
-              <img src="/img/greencheck.png" alt="" />
-              <span>Image upscaling</span>
-            </div>
-            <div className="item">
-              <img src="/img/greencheck.png" alt="" />
-              <span>Additional design</span>
-            </div>
+            {data.features.map(feature=>{
+              <div className="item" key={feature}>
+                <img src="/img/greencheck.png" alt="" />
+                <span>{feature}</span>
+              </div>
+            })}
           </div>
           <button>Continue</button>
         </div>
-      </div>
+      </div>}
     </div>
   )
 }
