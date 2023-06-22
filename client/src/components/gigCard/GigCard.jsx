@@ -14,7 +14,7 @@ const GigCard = ({ item }) => { // this item is coming from data.map(item=gig) s
   })
 
   return (
-    <Link to='/gig/123' style={{textDecoration: 'none'}}>
+    <Link to={`/gig/${item._id}`} style={{textDecoration: 'none'}}>
       <div className="gigCard">
         <img src={item.cover} alt="" />
         <div className="info">
