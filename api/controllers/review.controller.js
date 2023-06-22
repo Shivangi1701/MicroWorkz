@@ -14,7 +14,7 @@ export const createReview = async (req, res, next) => {
   try {
     const review = await Review.findOne({
       gigId: req.body.gigId,
-      userId: req.body.userId,
+      userId: req.userId,
     });
     // if already made a review
     if (review)
@@ -33,16 +33,16 @@ export const createReview = async (req, res, next) => {
   }
 };
 
-export const getReviews = async (req, res) => {
+export const getReviews = async (req, res, next) => {
   try {
-    const reviews = await Review.find({ gigId: req.body.gigId }); // all reviews on gig with gigId given
+    const reviews = await Review.find({ gigId: req.params.gigId }); // all reviews on gig with gigId given
     res.status(200).send(reviews);
   } catch (err) {
     next(err);
   }
 };
 
-export const deleteReview = async (req, res) => {
+export const deleteReview = async (req, res, next) => {
   try {
   } catch (err) {
     next(err);
