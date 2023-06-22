@@ -14,7 +14,15 @@ const Gig = () => {
     queryFn: () => newRequest.get(`/gigs/single/${id}`).then((res) => {
       return res.data;
     }),
-  })
+  });
+
+  const { isLoading: isLoadingUser, error: errorUser, data: dataUser } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => newRequest.get(`/users/${data?.userId}`).then((res) => { // there is a chance of first query not being executed and still we go for looking the data.userId
+      return res.data;
+    }),
+    enabled: !!data?.userId, // only when data is available
+  });
 
   return (
     <div className='gig'>
@@ -22,18 +30,20 @@ const Gig = () => {
         <div className="left">
           <span className='pathname'>MICROWORKZ{" > "}{data.cat}{" > "}</span>
           <h1>{data.title}</h1>
-          <div className="user">
-            <img className='pp' src="https://fiverr-res.cloudinary.com/t_profile_original,q_auto,f_auto/attachments/profile/photo/c5323d1e3c30bbac2c31a905b5bd8cb2-1675191168940/22bca898-8c41-4832-be06-ac78f7d044a4.PNG" alt="" />
-            <span>Navya Mehta</span>
-            {!isNaN(data.totalStars / data.starNumber) && (
-              <div className="stars">
-                {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i)=>(
-                  <img src="/img/star.png" alt="" key={i} />
-                ))}
-                <span>{Math.round(data.totalStars / data.starNumber)}</span>
-              </div>
-            )}
-          </div>
+          {isLoadingUser ? "loading" : errorUser ? "Something went wrong!" : 
+            <div className="user">
+              <img className='pp' src={dataUser.img || "/img/noavatar.png"} alt="" />
+              <span>{dataUser.username}</span>
+              {!isNaN(data.totalStars / data.starNumber) && (
+                <div className="stars">
+                  {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i)=>(
+                    <img src="/img/star.png" alt="" key={i} />
+                  ))}
+                  <span>{Math.round(data.totalStars / data.starNumber)}</span>
+                </div>
+              )}
+            </div>
+          }
           <Slider slidesToShow={1} arrowsScroll={1} className="slider" >
             {data.images.map(img=>(
               <img key={img} src={img} alt="" />
@@ -41,50 +51,52 @@ const Gig = () => {
           </Slider>
           <h2>About this gig</h2>
           <p>{data.desc}</p>
-          <div className="seller">
-            <h2>About the seller</h2>
-            <div className="user">
-              <img className='pp' src="https://fiverr-res.cloudinary.com/t_profile_original,q_auto,f_auto/attachments/profile/photo/c5323d1e3c30bbac2c31a905b5bd8cb2-1675191168940/22bca898-8c41-4832-be06-ac78f7d044a4.PNG" alt="" />
-              <div className="info">
-                <span>Navya Mehta</span>
-                {!isNaN(data.totalStars / data.starNumber) && (
-                  <div className="stars">
-                    {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i)=>(
-                      <img src="/img/star.png" alt="" key={i} />
-                    ))}
-                    <span>{Math.round(data.totalStars / data.starNumber)}</span>
+          {isLoadingUser ? "loading" : errorUser ? "Something went wrong!" : 
+            <div className="seller">
+              <h2>About the seller</h2>
+              <div className="user">
+                <img className='pp' src={dataUser.img || "/img/noavatar.png"} alt="" />
+                <div className="info">
+                  <span>{dataUser.username}</span>
+                  {!isNaN(data.totalStars / data.starNumber) && (
+                    <div className="stars">
+                      {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i)=>(
+                        <img src="/img/star.png" alt="" key={i} />
+                      ))}
+                      <span>{Math.round(data.totalStars / data.starNumber)}</span>
+                    </div>
+                  )}
+                  <button>Contact Me</button>
+                </div>
+              </div>
+              <div className="box">
+                <div className="items">
+                  <div className="item">
+                    <span className="title">From</span>
+                    <span className="desc">{dataUser.country}</span>
                   </div>
-                )}
-                <button>Contact Me</button>
+                  <div className="item">
+                    <span className="title">Member Since</span>
+                    <span className="desc">Nov 2022</span>
+                  </div>
+                  <div className="item">
+                    <span className="title">Avg. response time</span>
+                    <span className="desc">4 hours</span>
+                  </div>
+                  <div className="item">
+                    <span className="title">Last delivery</span>
+                    <span className="desc">19 hours</span>
+                  </div>
+                  <div className="item">
+                    <span className="title">Languages</span>
+                    <span className="desc">English</span>
+                  </div>
+                </div>
+                <hr/>
+                <p>{dataUser.desc}</p>
               </div>
             </div>
-            <div className="box">
-              <div className="items">
-                <div className="item">
-                  <span className="title">From</span>
-                  <span className="desc">India</span>
-                </div>
-                <div className="item">
-                  <span className="title">Member Since</span>
-                  <span className="desc">Nov 2022</span>
-                </div>
-                <div className="item">
-                  <span className="title">Avg. response time</span>
-                  <span className="desc">4 hours</span>
-                </div>
-                <div className="item">
-                  <span className="title">Last delivery</span>
-                  <span className="desc">19 hours</span>
-                </div>
-                <div className="item">
-                  <span className="title">Languages</span>
-                  <span className="desc">English</span>
-                </div>
-              </div>
-              <hr/>
-              <p>Hi there & welcome to my shop. I'm Navya Mehta - a digital artist who creates fully customizable images based on your specific needs and vision. You send me the photo or description, and I will present to you a one of a kind - AI generated piece of art. If you have any questions, send me a message anytime :)</p>
-            </div>
-          </div>
+          }
           <div className="reviews">
             <h2>Reviews</h2>
             <div className="item">  
