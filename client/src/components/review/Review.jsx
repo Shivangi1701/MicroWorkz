@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const Review = ({review}) => {
 
     const { isLoading, error, data } = useQuery({
-        queryKey: [`${review._id}`],
+        queryKey: [`${review.userId}`],
         queryFn: () => newRequest.get(`/users/${review.userId}`).then((res) => { // get reivews on that specific gig using gigId 
             return res.data;
         }),
