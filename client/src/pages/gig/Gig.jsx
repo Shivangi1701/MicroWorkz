@@ -77,7 +77,12 @@ const Gig = () => {
                   </div>
                   <div className="item">
                     <span className="title">Member Since</span>
-                    <span className="desc">Nov 2022</span>
+                    {dataUser.createdAt && (
+                      <>
+                        {new Date(dataUser.createdAt).toLocaleString('default', { month: 'long' })}{" "}
+                        {new Date(dataUser.createdAt).getFullYear()}
+                      </>
+                    )}
                   </div>
                   <div className="item">
                     <span className="title">Avg. response time</span>
