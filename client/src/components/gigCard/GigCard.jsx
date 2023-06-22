@@ -1,21 +1,31 @@
 import React from "react";
 import "./GigCard.scss";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from '../../utils/newRequest';
 
-const GigCard = ({ item }) => {
+const GigCard = ({ item }) => { // this item is coming from data.map(item=gig) so this is query data
+
+  const { isLoading, error, data } = useQuery({ // seller's data fetching when we are fetching a gig because gig has the seller's userID in it
+    queryKey: [`${item.userId}`],
+    queryFn: () => newRequest.get(`/users/${item.userId}`).then((res) => {
+      return res.data;
+    }),
+  })
+
   return (
-    <Link to='/gig/123'>
+    <Link to='/gig/123' style={{textDecoration: 'none'}}>
       <div className="gigCard">
-        <img src={item.img} alt="" />
+        <img src={item.cover} alt="" />
         <div className="info">
-            <div className="user">
-                <img src={item.pp} alt="" />
-                <span>{item.username}</span>
-            </div>
+            {isLoading ? "loading" : error ? "Something went wrong!" : <div className="user">
+                <img src={data.img || "/img/noavatar.png"} alt="" />
+                <span>{data.username}</span>
+            </div>}
             <p>{item.desc}</p>
             <div className="star">
                 <img src="./img/star.png" alt="" />
-                <span>{item.star}</span>
+                <span>{!isNaN(item.totalStars / item.starNumber) && Math.round(item.totalStars / item.starNumber)}</span>
             </div>
         </div>
         <hr />
