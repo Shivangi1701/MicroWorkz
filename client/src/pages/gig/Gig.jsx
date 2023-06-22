@@ -4,6 +4,7 @@ import { Slider } from 'infinite-react-carousel/lib'
 import { useQuery } from "@tanstack/react-query";
 import newRequest from '../../utils/newRequest';
 import { useParams } from 'react-router-dom';
+import Reviews from '../../components/reviews/Reviews';
 
 const Gig = () => {
 
@@ -102,12 +103,12 @@ const Gig = () => {
               </div>
             </div>
           }
-          
+          <Reviews gigId={id}/>
         </div>
         <div className="right">
           <div className="price">
             <h3>{data.shortTitle}</h3>
-            <h2>$ {data.price}</h2>
+            <h2>₹ {data.price}</h2>
           </div>
           <p>{data.shortDesc}</p>
           <div className="details">
