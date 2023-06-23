@@ -25,6 +25,14 @@ export const createOrder = async (req, res, next) => {
 
 export const getOrders = async (req, res, next) => {
   try {
+    const orders = await Order.find({
+      // if he is a seller -> show all orders that has sellerId equal to his userId i.e, req.userId
+      // if he is a buyer -> show all orders that has buyerId equal to his userId i.e, req.userId
+      ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
+      isCompleted: true,
+    });
+
+    res.status(200).send(orders);
   } catch (err) {
     next(err);
   }
