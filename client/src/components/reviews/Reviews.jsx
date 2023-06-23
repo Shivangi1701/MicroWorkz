@@ -6,7 +6,7 @@ import newRequest from '../../utils/newRequest';
 
 const Reviews = ({ gigId }) => {
 
-    const queryClient = useQueryClient();
+    const queryClient = useQueryClient(); // to interact with cache & memories
 
     const { isLoading, error, data } = useQuery({
         queryKey: ["reviews"],
