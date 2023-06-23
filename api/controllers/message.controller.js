@@ -16,7 +16,8 @@ export const createMessage = async (req, res, next) => {
       { id: req.body.conversationId },
       {
         $set: {
-          ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
+          readBySelller: req.isSeller,
+          readByBuyer: !req.isSeller,
           lastMessage: req.body.desc,
         },
       },
