@@ -28,8 +28,7 @@ export const updateConversation = async (req, res, next) => {
       {
         $set: {
           // after finding the conv. now we can update using set method
-          readBySeller: req.isSeller,
-          readByBuyer: !req.isSeller,
+          ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
         },
       },
       { new: true }
@@ -53,7 +52,7 @@ export const getSingleConversation = async (req, res, next) => {
 export const getConversations = async (req, res, next) => {
   try {
     const conversations = await Conversation.find(
-      req.isSeller ? { sellerId: req.userId } : { buyerId: req.buyerId }
+      req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
     );
     // if he is seller find all conv. with sellerId as his own userId
     // if he is buyer find all conv. with buyerId as his
