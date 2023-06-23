@@ -52,6 +52,12 @@ export const getSingleConversation = async (req, res, next) => {
 
 export const getConversations = async (req, res, next) => {
   try {
+    const conversations = await Conversation.find(
+      req.isSeller ? { sellerId: req.userId } : { buyerId: req.buyerId }
+    );
+    // if he is seller find all conv. with sellerId as his own userId
+    // if he is buyer find all conv. with buyerId as his
+    res.status(200).send(conversations);
   } catch (err) {
     next(err);
   }
