@@ -46,7 +46,7 @@ const Messages = () => {
           {data.map((conv)=>(
             <tr className={((currentUser.isSeller && !conv.readBySeller) || (!currentUser.isSeller && !conv.readByBuyer)) && "active"} key={conv.id}>
               <td>{currentUser.isSeller ? conv.buyerId : conv.sellerId}</td>
-              <td><Link to="/message/123" className="link">{conv?.lastMessage?.substring(0, 100)}...</Link></td>
+              <td><Link to={`/message/${conv.id}`} className="link">{conv?.lastMessage?.substring(0, 100)}...</Link></td>
               <td>{moment(conv.updatedAt).fromNow()}</td>
               <td>
                 {((currentUser.isSeller && !conv.readBySeller) || (!currentUser.isSeller && !conv.readByBuyer)) && (

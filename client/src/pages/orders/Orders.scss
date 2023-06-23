@@ -45,6 +45,10 @@
                         width: 20px;
                         cursor: pointer;
                     }
+                                        &:nth-child(2) {
+                                            color: gray;
+                                            width: 500px;
+                                        }
                 }
 
                 &:nth-child(even) {
