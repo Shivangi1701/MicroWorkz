@@ -1,16 +1,22 @@
 import React from "react";
 import "./Orders.scss";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from '../../utils/newRequest';
 const Orders = () => {
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   
-  const currentUser = {
-    id: 1,
-    username: "Shivangi Chauhan",
-    isSeller: true,
-  }
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["orders"],
+    queryFn: () => newRequest.get(`/order`).then((res) => {
+      return res.data;
+    }),
+  })
+
   return (
     <div className="orders">
-      <div className="container">
+      {isLoading ? "Loading" : error ? "Something went wrong!" : <div className="container">
         <div className="title">
           <h1>Orders</h1>
         </div>
@@ -19,77 +25,22 @@ const Orders = () => {
             <th>Image</th>
             <th>Title</th>
             <th>Price</th>
-            <th>{currentUser?.isSeller ? "Buyer" : "Seller"}</th>
             <th>Contact</th>
           </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="message" src="/img/message.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="message" src="/img/message.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="message" src="/img/message.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="message" src="/img/message.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="message" src="/img/message.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="message" src="/img/message.png" alt="" />
-            </td>
-          </tr>
+          {data.map((order) => (
+            <tr key={order._id}>
+              <td>
+                <img className="img" src={order.image} alt="" />
+              </td>
+              <td>{order.title}</td>
+              <td>{order.price}</td>
+              <td>
+                <img className="message" src="/img/message.png" alt="" />
+              </td>
+            </tr>
+          ))}
         </table>
-      </div>
+      </div>}
     </div>
   );
 };

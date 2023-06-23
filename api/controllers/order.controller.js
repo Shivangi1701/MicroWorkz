@@ -8,7 +8,7 @@ export const createOrder = async (req, res, next) => {
 
     const newOrder = new Order({
       gigId: gig._id, // object id of gig is stored as gigId in new order object
-      img: gig.cover,
+      image: gig.cover,
       title: gig.title,
       buyerId: req.userId, // user is buyer who made an order request
       sellerId: gig.userId, // gig has userId of seller the one who created it
