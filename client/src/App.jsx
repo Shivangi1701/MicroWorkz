@@ -11,6 +11,8 @@ import MyGigs from "./pages/myGigs/MyGigs";
 import Add from "./pages/add/Add";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
+import Success from "./pages/success/Success";
+import Pay from "./pages/pay/Pay";
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import "./App.scss";
@@ -73,6 +75,14 @@ function App() {
         {
           path:"/message/:id",
           element:<Message/>
+        },
+        {
+          path:"/pay",
+          element:<Pay/>
+        },
+        {
+          path:"/success",
+          element:<Success/>
         }
       ]
     },
