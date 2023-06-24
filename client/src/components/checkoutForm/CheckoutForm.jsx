@@ -5,20 +5,21 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import "./CheckoutForm.scss";
 
 const CheckoutForm = () => {
-  const stripe = useStripe(); // hook to get stripe instance to interact with StripeAPI
-  const elements = useElements(); // provides way to create & manage stripe elements
+  const stripe = useStripe();
+  const elements = useElements();
 
-  const [email, setEmail] = useState(""); // customer email
-  const [message, setMessage] = useState(""); // if there's an error show this message
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => { // triggered only when there's a change in stripe
+  useEffect(() => {
     if (!stripe) {
       return;
     }
-    // retreives clientsecret from url query parameters and uses it to retrieve payment intent from StripeAPI
+
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
@@ -26,8 +27,7 @@ const CheckoutForm = () => {
     if (!clientSecret) {
       return;
     }
-    
-    // to get paymentIntent from StripeAPI & handles response from API by using callback fn that takes destructred payment intent
+
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
@@ -50,7 +50,9 @@ const CheckoutForm = () => {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      return; // if stripe is loaded
+      // Stripe.js hasn't yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
     }
 
     setIsLoading(true);
@@ -59,7 +61,6 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        // if everything is okay we are redirected to this url page
         return_url: "http://localhost:5173/success",
       },
     });
@@ -84,23 +85,18 @@ const CheckoutForm = () => {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-
       <LinkAuthenticationElement
         id="link-authentication-element"
         onChange={(e) => setEmail(e.target.value)}
       />
-
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
       </button>
-
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
-
     </form>
   );
 };
