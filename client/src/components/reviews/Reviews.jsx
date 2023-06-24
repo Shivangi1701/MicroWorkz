@@ -22,7 +22,7 @@ const Reviews = ({ gigId }) => {
         onSuccess: () => {
             queryClient.invalidateQueries(["reviews"]); // invalidate specifc query hence trigger a re-fetch of that query
         }
-    })
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
