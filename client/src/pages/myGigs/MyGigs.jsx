@@ -17,6 +17,19 @@ const MyGigs = () => {
       }),
   });
 
+  const mutation = useMutation({
+      mutationFn: (id) => { // takes gigId as parameter and deletes it
+          return newRequest.delete(`/gigs/${id}`);
+      },
+      onSuccess: () => {
+          queryClient.invalidateQueries(["myGigs"]); // invalidate specifc query hence trigger a re-fetch of that query
+      }
+  });
+
+  const handleDelete = (id) => {
+    mutation.mutate(id);
+  }
+
   return (
     <div className="myGigs">
       {isLoading ? "Loading" : error ? "something went wrong !" : <div className="container">
@@ -37,7 +50,7 @@ const MyGigs = () => {
           </tr>
           </thead>
           <tbody>
-          {data.map((gig) => (
+          {data && data.map((gig) => (
             <tr key={gig._id}>
               <td>
                 <img className="img" src={gig.cover} alt="" />
@@ -46,10 +59,7 @@ const MyGigs = () => {
               <td>{gig.price}</td>
               <td>{gig.sales}</td>
               <td>
-                <img 
-                  className="delete" 
-                  src="/img/delete.png"
-                  alt="" />
+                <button className="delete" onClick={() => handleDelete(gig._id)}>Delete</button>
               </td>
             </tr>
           ))}
