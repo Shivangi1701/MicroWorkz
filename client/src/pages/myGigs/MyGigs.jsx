@@ -1,10 +1,25 @@
 import React from "react";
 import "./MyGigs.scss";
 import { Link } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import newRequest from '../../utils/newRequest';
+import getCurrentUser from '../../utils/getCurrentUser';
+
 const MyGigs = () => {
+  
+  const currentUser = getCurrentUser();
+  const queryClient = useQueryClient();
+
+  const { isLoading, error, data } = useQuery({
+      queryKey: ["myGigs"],
+      queryFn: () => newRequest.get(`/gigs?userId=${currentUser._id}`).then((res) => { // get reivews on that specific gig using gigId 
+          return res.data;
+      }),
+  });
+
   return (
     <div className="myGigs">
-      <div className="container">
+      {isLoading ? "Loading" : error ? "something went wrong !" : <div className="container">
         <div className="title">
           <h1>Gigs</h1>
           <Link to="/add">
@@ -12,81 +27,35 @@ const MyGigs = () => {
           </Link>
         </div>
         <table>
-          <tr>
+          <thead>
+            <tr>
             <th>Image</th>
             <th>Title</th>
             <th>Price</th>
             <th>Sales</th>
             <th>Action</th>
           </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img className="img" src="https://images.nightcafe.studio/jobs/sAMY7Zr3ppEBy8pDb7ms/sAMY7Zr3ppEBy8pDb7ms--1--q5eis_13.8889x.jpg?tr=w-1600,c-at_max" alt="" />
-            </td>
-            <td>Gig1</td>
-            <td>88</td>
-            <td>124</td>
-            <td>
-              <img className="delete" src="/img/delete.png" alt="" />
-            </td>
-          </tr>
+          </thead>
+          <tbody>
+          {data.map((gig) => (
+            <tr key={gig._id}>
+              <td>
+                <img className="img" src={gig.cover} alt="" />
+              </td>
+              <td>{gig.title}</td>
+              <td>{gig.price}</td>
+              <td>{gig.sales}</td>
+              <td>
+                <img 
+                  className="delete" 
+                  src="/img/delete.png"
+                  alt="" />
+              </td>
+            </tr>
+          ))}
+          </tbody>
         </table>
-      </div>
+      </div>}
     </div>
   );
 };

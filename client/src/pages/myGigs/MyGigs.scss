@@ -9,6 +9,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin: 0px 75px;
 
       button {
         background-color: #1dbf73;
@@ -22,7 +23,8 @@
     }
 
     table {
-      width: 100%;
+      width: 90%;
+      margin: 0px 75px;
       tr {
         height: 50px;
         th{
