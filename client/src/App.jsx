@@ -77,7 +77,7 @@ function App() {
           element:<Message/>
         },
         {
-          path:"/pay",
+          path:"/pay/:id",
           element:<Pay/>
         },
         {
