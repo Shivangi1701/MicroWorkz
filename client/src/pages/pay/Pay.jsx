@@ -24,6 +24,7 @@ const Pay = () => {
                 console.log(err);
             }
         }
+        makeRequest();
     }, [clientSecret]);
 
     // stripe theme
