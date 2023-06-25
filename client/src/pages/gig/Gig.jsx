@@ -4,7 +4,7 @@ import { Slider } from 'infinite-react-carousel/lib'
 import { useQuery } from "@tanstack/react-query";
 import newRequest from '../../utils/newRequest';
 import getCurrentUser from '../../utils/getCurrentUser';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Reviews from '../../components/reviews/Reviews';
 
 const Gig = () => {
@@ -25,6 +25,22 @@ const Gig = () => {
     }),
     enabled: !!data?.userId, // only when data is available
   });
+  
+  const navigate = useNavigate();
+  const handleContact = async () => {
+    const sellerId = data?.userId;
+    const buyerId = currentUser._id; // only if user
+    const msgId = sellerId + buyerId;
+    try {
+      const res = await newRequest.get(`/conversation/single/${msgId}`);
+      navigate(`/message/${res.data.id}`); // if conversation already exist
+    } catch (err) {
+      if(err.response && err.response.status === 404){ // means we don't have existing conversation
+        const res = await newRequest.post(`/conversation`, { to: sellerId });
+      }
+      navigate(`/message/${res.data.id}`);
+    }
+  }
 
   return (
     <div className='gig'>
@@ -68,7 +84,7 @@ const Gig = () => {
                       <span>{Math.round(data.totalStars / data.starNumber)}</span>
                     </div>
                   )}
-                  {(currentUser._id !== dataUser._id) &&(<button>Contact Me</button>)}
+                  {(currentUser._id !== dataUser._id) &&(<button onClick={handleContact}>Contact Me</button>)}
                 </div>
               </div>
               <div className="box">
@@ -130,7 +146,7 @@ const Gig = () => {
               </div>
             })}
           </div>
-          {(currentUser._id !== dataUser._id) && (<Link to={`/pay/${id}`}>
+          {(currentUser._id !== data.userId) && (<Link to={`/pay/${id}`}>
           <button>Continue</button>
           </Link>)}
         </div>
