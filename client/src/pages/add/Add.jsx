@@ -2,6 +2,9 @@ import React, { useState, useReducer } from 'react'
 import "./Add.scss"
 import { gigReducer, INITIAL_STATE } from '../../reducers/gigReducer';
 import upload from "../../utils/upload"
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
+import {useNavigate} from "react-router-dom";
 
 const Add = () => {
   const [singleFile, setSingleFile] = useState();
@@ -46,8 +49,22 @@ const Add = () => {
       console.log(err);
     }
   };
+  const navigate = useNavigate();
+  const queryClient = useQueryClient(); // to interact with cache & memories
+  const mutation = useMutation({
+    mutationFn: (gig) => { // takes gig as a paramter and makes post request with gig data
+        return newRequest.post("/gigs", gig);
+    },
+    onSuccess: () => {
+        queryClient.invalidateQueries(["myGigs"]); // invalidate specifc query hence trigger a re-fetch of that query
+    }
+  });
 
-  console.log(state);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate(state);
+    //navigate("/myGigs")
+  }
 
   return (
     <div className="add">
@@ -87,7 +104,7 @@ const Add = () => {
               placeholder='Brief description to introduce your service to customers'
               onChange={handleChange}
             ></textarea>
-            <button>Create</button>
+            <button onClick={handleSubmit}>Create</button>
           </div>
           <div className="right">
             <label htmlFor="">Service Title</label>
