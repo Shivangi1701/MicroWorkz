@@ -22,16 +22,16 @@ export const gigReducer = (state, action) => {
         ...state,
         [action.payload.name]: action.payload.value,
       };
-    case "ADD_IMAGES": // to change all input fields
+    case "ADD_IMAGES":
       return {
         ...state,
         cover: action.payload.cover,
         images: action.payload.images,
       };
-    case "ADD_FEATURE": // to change all input fields
+    case "ADD_FEATURE":
       return {
         ...state,
-        features: [...state.feature, action.payload],
+        features: [...state.features, action.payload], // keep the current state features and also action.payload incoming feature and update state
       };
     case "REMOVE_FEATURE": // to change all input fields
       return {
