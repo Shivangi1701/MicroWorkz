@@ -50,7 +50,11 @@ const Orders = () => {
               <td>
                 <img className="img" src={order.image} alt="" />
               </td>
-              <td>{order.title}</td>
+              <td>
+                <Link to={`/gig/${order.gigId}`} style={{textDecoration: 'none', color: 'inherit'}}>
+                  {order.title}
+                </Link>
+              </td>
               <td>{order.price}</td>
               <td>
                 <img className="message" src="/img/message.png" alt="" onClick={()=>handleContact(order)}/>

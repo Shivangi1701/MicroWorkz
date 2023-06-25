@@ -55,7 +55,11 @@ const MyGigs = () => {
               <td>
                 <img className="img" src={gig.cover} alt="" />
               </td>
-              <td>{gig.title}</td>
+              <td>
+                <Link to = {`/gig/${gig._id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+                  {gig.title}
+                </Link>
+              </td>
               <td>{gig.price}</td>
               <td>{gig.sales}</td>
               <td>

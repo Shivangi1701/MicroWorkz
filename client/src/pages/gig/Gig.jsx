@@ -3,11 +3,12 @@ import "./Gig.scss"
 import { Slider } from 'infinite-react-carousel/lib'
 import { useQuery } from "@tanstack/react-query";
 import newRequest from '../../utils/newRequest';
+import getCurrentUser from '../../utils/getCurrentUser';
 import { useParams, Link } from 'react-router-dom';
 import Reviews from '../../components/reviews/Reviews';
 
 const Gig = () => {
-
+  const currentUser = getCurrentUser();
   const {id} = useParams(); // gig id from query params
 
   const { isLoading, error, data } = useQuery({ // fetching gig data through it's id in query parameter
@@ -67,7 +68,7 @@ const Gig = () => {
                       <span>{Math.round(data.totalStars / data.starNumber)}</span>
                     </div>
                   )}
-                  <button>Contact Me</button>
+                  {(currentUser._id !== dataUser._id) &&(<button>Contact Me</button>)}
                 </div>
               </div>
               <div className="box">
@@ -129,9 +130,9 @@ const Gig = () => {
               </div>
             })}
           </div>
-          <Link to={`/pay/${id}`}>
+          {(currentUser._id !== dataUser._id) && (<Link to={`/pay/${id}`}>
           <button>Continue</button>
-          </Link>
+          </Link>)}
         </div>
       </div>}
     </div>
