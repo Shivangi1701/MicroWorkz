@@ -24,7 +24,16 @@ const Success = () => {
   },[]);
 
   return (
-    <div>Payment SuccessFul. You are being redirected to the orders page. Please do not close the page</div>
+    <div className='success'>
+      <div className="container">
+        <div className="title">
+          <h1>Payment SuccessFul</h1>
+          <img src="/img/greencheck.png" alt="" />
+        </div>
+        <h2>You are being redirected to the orders page... </h2>
+        <h3>Please do not close the page</h3>
+      </div>
+    </div>
   )
 }
 
