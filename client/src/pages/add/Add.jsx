@@ -4,7 +4,7 @@ import { gigReducer, INITIAL_STATE } from '../../reducers/gigReducer';
 import upload from "../../utils/upload"
 
 const Add = () => {
-  const [singleFile, setSingleFile] = useState(undefined);
+  const [singleFile, setSingleFile] = useState();
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
 
@@ -30,13 +30,13 @@ const Add = () => {
   const handleUpload = async () => {
     setUploading(true);
     try {
-      const cover = await upload(singleFile);
       const images = await Promise.all(
         [...files].map(async (file)=>{ // [...files] bcz to have files as array and not fileList
           const url = await upload(file);
           return url; // for each file we are gonna get url and promise all will make it an array
         }) 
       );
+      const cover = await upload(singleFile);
       setUploading(false);
       dispatch({
         type: "ADD_IMAGES",
@@ -46,6 +46,8 @@ const Add = () => {
       console.log(err);
     }
   };
+
+  console.log(state);
 
   return (
     <div className="add">
@@ -70,11 +72,11 @@ const Add = () => {
             <div className="images">
               <div className="imagesInputs">
                 <label htmlFor="">Cover Image</label>
-                <input type="file" onClick={e=>setSingleFile(e.target.files[0])}/>
+                <input type="file" onChange={e=>setSingleFile(e.target.files[0])}/>
                 <label htmlFor="">Upload Image</label>
-                <input type="file" multiple onClick={e=>setFiles(e.target.files)}/>
+                <input type="file" multiple onChange={e=>setFiles(e.target.files)}/>
               </div>
-              <button>{uploading ? "uploading..." : "Upload"}</button>
+              <button onClick={handleUpload}>{uploading ? "uploading..." : "Upload"}</button>
             </div>
             <label htmlFor="">Description</label>
             <textarea 
